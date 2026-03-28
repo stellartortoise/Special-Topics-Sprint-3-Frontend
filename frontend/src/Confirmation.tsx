@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
 
 function Confirmation() {
-    const [count, setCount] = useState(0)
+    const [status, setStatus] = useState(null);
+    const [customerEmail, setCustomerEmail] = useState('');
 
-    return (
-        <>
-            <div>
-                <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
+    useEffect(() => {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const sessionId = urlParams.get('session_id')
+
+        fetch(`http://localhost:8080/checkout/session-status?session_id=${sessionId}`)
+            // .then((res) => res.json)
+            // .then((data) => {
+            //     console.log("DATA:", data);
+            //     setStatus(data.status);
+            //     setCustomerEmail(data.customer_email);
+
+            //});
+
+            .then(res => {
+                console.log("RES STATUS:", res.status);
+                return res.json();
+            })
+            .then(data => {
+                console.log("DATA:", data);
+
+                setStatus(data.status);
+                setCustomerEmail(data.customer_email);
+            })
+            .catch(err => console.error("Error:", err));
+
+    }, []);
+
+    if (status === 'complete') {
+        return (
+            <section id={"success"}>
                 <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
+                    We appreciate your business! A confirmation email will be sent to {customerEmail}.
+
+                    if you have any questions, please email email.
                 </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-        </>
-    )
+            </section>
+        )
+    }
+
+    return null;
 }
 
 export default Confirmation

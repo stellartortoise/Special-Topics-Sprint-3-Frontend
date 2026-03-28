@@ -1,33 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function Home() {
-    const [count, setCount] = useState(0)
 
     return (
         <>
+
             <div>
-                <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
+
+                <section className="hero">
+                    <h1>Welcome to My Store</h1>
+                    <p>Buy the best digital products, fast and secure.</p>
+
+                    <a href="/cart" className="cta-btn">
+                        View Cart
+                    </a>
+                </section>
+
+                <section className="products">
+                    <h2>Featured Product</h2>
+
+                    <div className="product-card">
+                        <img
+                            src="/images/product.jpg"
+                            alt="Video Game"
+                            className="product-img"
+                        />
+
+                        <h3>Video Game</h3>
+                        <p>CAD $25.00</p>
+
+                        <a href="/checkout" className="buy-btn">
+                            Buy Now
+                        </a>
+                    </div>
+                </section>
+
             </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
+            );
+
         </>
     )
 }

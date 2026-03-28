@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import { useState } from 'react'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
+import { loadStripe } from '@stripe/stripe-js'
+import {useCallback} from "react";
+import {EmbeddedCheckout, EmbeddedCheckoutProvider} from "@stripe/react-stripe-js";
 
-function Checkout() {
-    const [count, setCount] = useState(0)
+export default function Checkout() {
+
+    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
+    const fetchClientSecret = useCallback(() => {
+        // Create a Checkout Session
+        return fetch("http://localhost:8080/checkout/create-checkout-session", {
+            method: "POST",
+        })
+            .then((res) => res.json())
+            .then((data) => data.clientSecret);
+    }, []);
+
+    const options = {fetchClientSecret};
 
     return (
         <>
-            <div>
-                <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
+            <div id="checkout">
+                <EmbeddedCheckoutProvider
+                    stripe={stripePromise}
+                    options={options}
+                >
+                    <EmbeddedCheckout />
+                </EmbeddedCheckoutProvider>
             </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
         </>
     )
 }
-
-export default Checkout
