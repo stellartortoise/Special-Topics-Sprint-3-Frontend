@@ -7,6 +7,7 @@ import Home from './Home.tsx'
 import Cart from './Cart.tsx'
 import Checkout from './Checkout.tsx'
 import Confirmation from "./Confirmation.tsx";
+import Details from "./components/Details.tsx";
 // createRoot(document.getElementById('root')!).render(
 //   <StrictMode>
 //     <App />
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/details" element={<Details />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/confirmation" element={<Confirmation />} />

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import {Navigate} from "react-router";
 
 function Confirmation() {
     const [status, setStatus] = useState(null);
@@ -31,6 +32,12 @@ function Confirmation() {
             .catch(err => console.error("Error:", err));
 
     }, []);
+
+    if (status === 'open') {
+        return (
+            <Navigate to="/checkout" />
+        )
+    }
 
     if (status === 'complete') {
         return (
