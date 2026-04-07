@@ -96,16 +96,23 @@ body {
 }
 
 .game-card {
-  width: 280px; /* Locks the width so they don't stretch out of proportion */
+  /* --- NEW LINK RESET STYLES --- */
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  /* ----------------------------- */
+
+  width: 280px;
   background: rgba(0, 0, 0, 0.7);
   border: 2px solid var(--neon-cyan);
   border-radius: 4px;
   padding: 2.5rem 1.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px var(--neon-cyan), inset 0 0 10px var(--neon-cyan);
+
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center; /* Center the text since the button is gone */
   align-items: center;
   min-height: 180px;
 }
@@ -173,4 +180,172 @@ body {
 
 @keyframes blink {
   50% { opacity: 0; }
+}
+
+/* --- Details Page Styles --- */
+
+.nav-bar {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.neon-back-btn {
+  color: var(--neon-cyan);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: 0.3s;
+  text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+.neon-back-btn:hover {
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+}
+
+.details-card {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--neon-pink);
+  border-radius: 8px;
+  padding: 3rem;
+  box-shadow: 0 0 15px var(--neon-pink), inset 0 0 15px var(--neon-pink);
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Mobile responsive - stacks columns on small screens */
+@media (max-width: 768px) {
+  .details-card {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+}
+
+.details-image-container {
+  flex: 1;
+  max-width: 400px;
+}
+
+.game-image {
+  width: 100%;
+  border: 2px solid var(--neon-cyan);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.game-image-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border: 2px dashed var(--neon-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', cursive;
+  color: var(--neon-cyan);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.details-info-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.details-title {
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  font-size: 2rem;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-cyan);
+  line-height: 1.3;
+}
+
+.details-price {
+  font-size: 1.5rem; /* Make the price bigger on the details page */
+}
+
+.details-meta {
+  background: rgba(0, 255, 255, 0.05);
+  border-left: 4px solid var(--neon-cyan);
+  padding: 1rem;
+  margin-bottom: 2rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  line-height: 2;
+}
+
+.details-meta span {
+  color: var(--neon-pink);
+}
+
+.details-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  color: #e0e0e0;
+}
+
+.add-cart-btn {
+  align-self: flex-start;
+  font-size: 1rem;
+  padding: 15px 30px;
+}
+
+.neon-success-message {
+  background: rgba(57, 255, 20, 0.2);
+  border: 2px solid var(--neon-green);
+  color: var(--neon-green);
+  font-family: 'Press Start 2P', cursive;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px var(--neon-green);
+  box-shadow: 0 0 15px var(--neon-green);
+  animation: flash 0.5s ease-in-out 3;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* --- Search Terminal Styles --- */
+
+.search-container {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.neon-search {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2), inset 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+/* Change the placeholder text color so it isn't completely hidden */
+.neon-search::placeholder {
+  color: rgba(0, 255, 255, 0.5);
+}
+
+/* When the user clicks into the search bar, shift the colors to hot pink */
+.neon-search:focus {
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+  box-shadow: 0 0 15px var(--neon-pink), inset 0 0 15px var(--neon-pink);
+}
+
+.neon-search:focus::placeholder {
+  color: rgba(255, 0, 255, 0.5);
 }
