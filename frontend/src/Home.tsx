@@ -1,6 +1,7 @@
 import './App.css'
 import {useEffect, useState} from "react";
 import type {Game} from './types/Game.tsx';
+import {Link} from "react-router";
 
 function Home() {
     const [games, setGames] = useState<Game[]>([])
@@ -19,9 +20,15 @@ function Home() {
         <>
             <h1>Home</h1>
 
-            <p>
-
-            </p>
+            {games.length > 0 && (
+                games.map(game => (
+                    <div key={game.id} className={"pb-3"}>
+                        <Link to={`/details/${game.id}`}>
+                            {game.name}
+                        </Link>
+                    </div>
+                ))
+            )}
         </>
 
     )

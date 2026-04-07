@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import {Navigate} from "react-router";
+import Cookies from "js-cookie";
 
 function Confirmation() {
     const [status, setStatus] = useState(null);
     const [customerEmail, setCustomerEmail] = useState('');
+    const COOKIE_KEY = "shopping_cart";
 
     useEffect(() => {
         const queryString = window.location.search;
@@ -40,6 +42,8 @@ function Confirmation() {
     }
 
     if (status === 'complete') {
+        Cookies.remove(COOKIE_KEY);
+
         return (
             <section id={"success"}>
                 <p>
