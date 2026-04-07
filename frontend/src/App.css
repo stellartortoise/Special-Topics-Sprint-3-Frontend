@@ -1,42 +1,176 @@
-#root {
-  max-width: 1280px;
+/*#root {*/
+/*  max-width: 1280px;*/
+/*  margin: 0 auto;*/
+/*  padding: 2rem;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.logo {*/
+/*  height: 6em;*/
+/*  padding: 1.5em;*/
+/*  will-change: filter;*/
+/*  transition: filter 300ms;*/
+/*}*/
+/*.logo:hover {*/
+/*  filter: drop-shadow(0 0 2em #646cffaa);*/
+/*}*/
+/*.logo.react:hover {*/
+/*  filter: drop-shadow(0 0 2em #61dafbaa);*/
+/*}*/
+
+/*@keyframes logo-spin {*/
+/*  from {*/
+/*    transform: rotate(0deg);*/
+/*  }*/
+/*  to {*/
+/*    transform: rotate(360deg);*/
+/*  }*/
+/*}*/
+
+/*@media (prefers-reduced-motion: no-preference) {*/
+/*  a:nth-of-type(2) .logo {*/
+/*    animation: logo-spin infinite 20s linear;*/
+/*  }*/
+/*}*/
+
+/*.card {*/
+/*  padding: 2em;*/
+/*}*/
+
+/*.read-the-docs {*/
+/*  color: #888;*/
+/*}*/
+
+/* Import an 8-bit font for the headers and a clean sans-serif for body text */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Varela+Round&display=swap');
+
+:root {
+  --neon-pink: #ff00ff;
+  --neon-cyan: #00ffff;
+  --dark-purple: #0b0014;
+  --grid-color: rgba(255, 0, 255, 0.15);
+  --neon-green: #39ff14; /* Add this! */
+}
+
+body {
+  background-color: var(--dark-purple);
+  color: white;
+  font-family: 'Varela Round', sans-serif;
+  margin: 0;
+  /* Synthwave perspective grid background */
+  background-image:
+          linear-gradient(transparent 95%, var(--grid-color) 100%),
+          linear-gradient(90deg, transparent 95%, var(--grid-color) 100%);
+  background-size: 40px 40px;
+  min-height: 100vh;
+}
+
+.synthwave-container {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem 1rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.neon-title {
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  /* Stacking text-shadows creates the neon glow */
+  text-shadow:
+          0 0 5px #fff,
+          0 0 10px #fff,
+          0 0 20px var(--neon-pink),
+          0 0 40px var(--neon-pink),
+          0 0 80px var(--neon-pink);
+  margin-bottom: 4rem;
+  font-size: 3rem;
+  letter-spacing: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.game-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* This perfectly centers the cards */
+  gap: 2.5rem;
+  padding: 1rem;
 }
 
-.card {
-  padding: 2em;
+.game-card {
+  width: 280px; /* Locks the width so they don't stretch out of proportion */
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid var(--neon-cyan);
+  border-radius: 4px;
+  padding: 2.5rem 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px var(--neon-cyan), inset 0 0 10px var(--neon-cyan);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 180px;
 }
 
-.read-the-docs {
-  color: #888;
+.game-price {
+  font-family: 'Press Start 2P', cursive;
+  color: var(--neon-green);
+  font-size: 0.8rem;
+  margin-bottom: 1.5rem;
+  /* This creates the signature neon glow effect */
+  text-shadow:
+          0 0 5px #fff,
+          0 0 10px var(--neon-green),
+          0 0 20px var(--neon-green);
+  letter-spacing: 1px;
+}
+
+/* Hover effects to make the cards feel interactive */
+.game-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 20px var(--neon-pink), inset 0 0 20px var(--neon-pink);
+}
+
+.game-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.game-card:hover .game-title {
+  color: var(--neon-pink);
+}
+
+.neon-button {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 2px solid var(--neon-pink);
+  color: white;
+  text-decoration: none;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  background: transparent;
+  transition: 0.2s;
+  box-shadow: 0 0 8px var(--neon-pink), inset 0 0 8px var(--neon-pink);
+  cursor: pointer;
+}
+
+.neon-button:hover {
+  background: var(--neon-pink);
+  color: var(--dark-purple);
+  box-shadow: 0 0 20px var(--neon-pink), inset 0 0 10px var(--neon-pink);
+}
+
+.loading-text {
+  font-family: 'Press Start 2P', cursive;
+  color: var(--neon-cyan);
+  animation: blink 1s step-end infinite;
+  grid-column: 1 / -1;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
 }
