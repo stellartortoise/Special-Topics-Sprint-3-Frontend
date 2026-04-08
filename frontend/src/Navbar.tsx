@@ -5,12 +5,19 @@ import type { Cart, CartItem } from "./types/Cart.tsx";
 
 const getInitialCartCount = () => {
     const raw = Cookies.get("shopping_cart");
+
     if (raw) {
         const cart: Cart = JSON.parse(raw);
         // Swap 'any' for 'CartItem' right here:
         return cart.items.reduce((sum: number, item: CartItem) => sum + item.quantity, 0);
     }
     return 0;
+};
+
+const handleClearCart = () => {
+    Cookies.remove("shopping_cart");
+    window.dispatchEvent(new Event('cartUpdated'));
+    // We'll leave the tray open so they see the satisfying "NO DATA FOUND" message
 };
 
 export default function Navbar() {
@@ -79,6 +86,10 @@ export default function Navbar() {
                         <Link to="/checkout" className="neon-button checkout-btn" onClick={() => setIsCartOpen(false)}>
                             INITIATE CHECKOUT
                         </Link>
+
+                        <button className="neon-button danger-btn clear-cart-btn" onClick={handleClearCart}>
+                            PURGE CART
+                        </button>
                     </div>
                 )}
             </div>

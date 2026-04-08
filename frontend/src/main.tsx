@@ -8,7 +8,8 @@ import Cart from './Cart.tsx'
 import Checkout from './Checkout.tsx'
 import Confirmation from "./Confirmation.tsx";
 import Details from "./components/Details.tsx";
-import Navbar from "./Navbar.tsx";
+// import Navbar from "./Navbar.tsx";
+import Layout from "./Layout.tsx";
 // createRoot(document.getElementById('root')!).render(
 //   <StrictMode>
 //     <App />
@@ -18,14 +19,16 @@ import Navbar from "./Navbar.tsx";
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <BrowserRouter>
-            <Navbar />
+            {/*<Navbar />*/}
 
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/details/:id" element={<Details />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/confirmation" element={<Confirmation />} />
+                <Route element={<Layout />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/details/:id" element={<Details />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/confirmation" element={<Confirmation />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     </StrictMode>,
