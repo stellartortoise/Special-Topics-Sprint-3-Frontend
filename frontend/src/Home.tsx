@@ -38,7 +38,7 @@ function Home() {
         // </>
 
         <div className="synthwave-container">
-            <h1 className="neon-title">ARCADE</h1>
+            {/*<h1 className="neon-title">ARCADE</h1>*/}
 
             {/* The Search Terminal */}
             <div className="search-container">

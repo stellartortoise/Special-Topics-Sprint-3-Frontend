@@ -66,10 +66,16 @@ body {
 }
 
 .synthwave-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 3rem 1rem;
   text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .neon-title {
@@ -213,6 +219,8 @@ body {
   gap: 3rem;
   align-items: flex-start;
   text-align: left;
+
+  margin: auto 0;
 }
 
 /* Mobile responsive - stacks columns on small screens */
@@ -348,4 +356,133 @@ body {
 
 .neon-search:focus::placeholder {
   color: rgba(255, 0, 255, 0.5);
+}
+
+/* --- Global Navbar --- */
+.synth-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 2rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--grid-color);
+  width: 100%;
+}
+
+.nav-logo {
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink);
+  font-size: 2.5rem;
+  text-decoration: none;
+  letter-spacing: 5px;
+}
+
+.cart-btn {
+  font-size: 0.8rem;
+  padding: 15px 20px;
+}
+
+/* --- Sliding Sidebar Cart --- */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 99; /* Sits just below the sidebar */
+  backdrop-filter: blur(3px);
+}
+
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px; /* Hides it off-screen by default */
+  width: 350px;
+  height: 100vh;
+  background: rgba(11, 0, 20, 0.95);
+  border-left: 2px solid var(--neon-pink);
+  box-shadow: -5px 0 20px rgba(255, 0, 255, 0.3);
+  z-index: 100;
+  transition: right 0.3s ease-in-out; /* The smooth slide animation */
+  display: flex;
+  flex-direction: column;
+}
+
+/* This class is toggled by React state to slide it in */
+.cart-sidebar.open {
+  right: 0;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--neon-cyan);
+}
+
+.cart-header h2 {
+  font-family: 'Press Start 2P', cursive;
+  color: var(--neon-cyan);
+  font-size: 1.2rem;
+  margin: 0;
+  text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: var(--neon-pink);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-shadow: 0 0 10px var(--neon-pink);
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  color: white;
+  text-shadow: 0 0 15px #fff;
+}
+
+.cart-content {
+  flex: 1;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.neon-text-cyan {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 5px var(--neon-cyan);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.neon-text-pink {
+  color: var(--neon-pink);
+  text-shadow: 0 0 5px var(--neon-pink);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+}
+
+.text-muted {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.cart-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--neon-cyan);
+}
+
+.checkout-btn {
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  display: block;
 }

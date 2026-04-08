@@ -121,6 +121,9 @@ export default function Details() {
 
         Cookies.set(COOKIE_KEY, JSON.stringify({ items: updatedItems }), { expires: 1 });
 
+        // Broadcast the update
+        window.dispatchEvent(new Event('cartUpdated'));
+
         // Show the neon success message, then hide it after 3 seconds
         setShowMessage(true);
         setTimeout(() => setShowMessage(false), 3000);
