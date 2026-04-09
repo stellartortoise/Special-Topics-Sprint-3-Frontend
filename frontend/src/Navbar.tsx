@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Cookies from "js-cookie";
 import type { Cart, CartItem } from "./types/Cart.tsx";
+import type { Game } from "./types/Game.tsx";
+
+type CartDetailItem = Game & { quantity: number };
 
 const getInitialCartCount = () => {
     const raw = Cookies.get("shopping_cart");
@@ -15,12 +18,9 @@ const getInitialCartCount = () => {
 export default function Navbar() {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [cartCount, setCartCount] = useState(getInitialCartCount);
-
-    // NEW: State to hold the actual game details and a loading toggle
-    const [cartDetails, setCartDetails] = useState<any[]>([]);
+    const [cartDetails, setCartDetails] = useState<CartDetailItem[]>([]);
     const [isDecrypting, setIsDecrypting] = useState(false);
 
-    // NEW: Function to fetch the full game data for every ID in the cookie
     const loadCartData = async () => {
         const raw = Cookies.get("shopping_cart");
         if (!raw) {
@@ -35,15 +35,12 @@ export default function Navbar() {
 
         setIsDecrypting(true);
         try {
-            // Map through the cookie items and fetch the matching game from the backend
             const fetchPromises = cart.items.map(async (item: CartItem) => {
                 const res = await fetch(`http://localhost:8080/games/${item.id}`);
                 const gameData = await res.json();
-                // Combine the backend game data with the quantity from the cookie
                 return { ...gameData, quantity: item.quantity };
             });
 
-            // Wait for all fetches to finish, then save to state
             const details = await Promise.all(fetchPromises);
             setCartDetails(details);
         } catch (error) {
@@ -54,11 +51,9 @@ export default function Navbar() {
     };
 
     useEffect(() => {
-        // Load the full data when the navbar first mounts
         loadCartData();
 
         const handleCartUpdate = () => {
-            // When an item is added, reload the data and pop open the tray
             loadCartData();
             setIsCartOpen(true);
         };
@@ -72,13 +67,15 @@ export default function Navbar() {
         window.dispatchEvent(new Event('cartUpdated'));
     };
 
-    // Calculate total price of the cart
-    const cartTotal = cartDetails.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    // --- NEW TAX CALCULATIONS ---
+    const cartSubtotal = cartDetails.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const cartTax = Math.round(cartSubtotal * 0.14); // 14% Tax, rounded to the nearest cent
+    const cartTotal = cartSubtotal + cartTax;
 
     return (
         <>
             <nav className="synth-navbar">
-                <Link to="/" className="nav-logo">LOST CARTRIDGE ARCADE</Link>
+                <Link to="/" className="nav-logo">LOST CARTRIDGE</Link>
                 <button className="neon-button cart-btn" onClick={() => setIsCartOpen(true)}>
                     CART [{cartCount}]
                 </button>
@@ -101,7 +98,6 @@ export default function Navbar() {
                             </div>
                         ) : (
                             <div className="cart-item-list">
-                                {/* Map out the actual games! */}
                                 {cartDetails.map((item, index) => (
                                     <div key={index} className="cart-item-row">
                                         <div className="cart-item-info">
@@ -110,20 +106,34 @@ export default function Navbar() {
                                         </div>
                                         <span className="cart-item-price">
                                             {new Intl.NumberFormat('en-US', {
-                                                style: 'currency', currency: 'USD'
+                                                style: 'currency', currency: 'CAD'
                                             }).format((item.price * item.quantity) / 100)}
                                         </span>
                                     </div>
                                 ))}
 
-                                <div className="cart-total-row">
-                                    <span>TOTAL:</span>
-                                    <span className="neon-text-green">
-                                        {new Intl.NumberFormat('en-US', {
-                                            style: 'currency', currency: 'USD'
-                                        }).format(cartTotal / 100)}
-                                    </span>
+                                {/* --- NEW RECEIPT BREAKDOWN --- */}
+                                <div className="cart-summary">
+                                    <div className="cart-summary-row">
+                                        <span>SUBTOTAL:</span>
+                                        <span>
+                                            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'CAD' }).format(cartSubtotal / 100)}
+                                        </span>
+                                    </div>
+                                    <div className="cart-summary-row">
+                                        <span>TAX (14%):</span>
+                                        <span>
+                                            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'CAD' }).format(cartTax / 100)}
+                                        </span>
+                                    </div>
+                                    <div className="cart-total-row">
+                                        <span>TOTAL:</span>
+                                        <span className="neon-text-green">
+                                            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'CAD' }).format(cartTotal / 100)}
+                                        </span>
+                                    </div>
                                 </div>
+
                             </div>
                         )
                     ) : (
