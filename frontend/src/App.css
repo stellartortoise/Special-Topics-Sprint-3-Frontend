@@ -554,3 +554,211 @@ body {
   margin-top: 1rem;
   display: block;
 }
+
+/* --- Chat Widget Styles --- */
+
+.chat-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.chat-fab {
+  font-size: 0.7rem;
+  padding: 12px 20px;
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+}
+
+.chat-window {
+  width: 350px;
+  height: 450px;
+  background: rgba(11, 0, 20, 0.95);
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2), inset 0 0 15px rgba(0, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  backdrop-filter: blur(5px);
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  border-bottom: 2px solid var(--neon-cyan);
+  background: rgba(0, 255, 255, 0.05);
+}
+
+.online-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: var(--neon-green);
+  box-shadow: 0 0 8px var(--neon-green);
+  border-radius: 50%;
+  animation: blink-glow 2s infinite;
+}
+
+.header-info {
+  flex-grow: 1;
+}
+
+.ai-title {
+  font-family: 'Press Start 2P', cursive;
+  color: var(--neon-cyan);
+  font-size: 0.7rem;
+  text-shadow: 0 0 5px var(--neon-cyan);
+  margin-bottom: 4px;
+}
+
+.ai-status {
+  color: var(--neon-green);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Custom Scrollbar for the chat */
+.chat-body::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+.chat-body::-webkit-scrollbar-thumb {
+  background: var(--neon-cyan);
+  border-radius: 3px;
+}
+
+.chat-msg-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.wrapper-user {
+  justify-content: flex-end;
+}
+
+.wrapper-ai {
+  justify-content: flex-start;
+}
+
+.chat-msg {
+  max-width: 80%;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.msg-user {
+  background: rgba(255, 0, 255, 0.15);
+  border: 1px solid var(--neon-pink);
+  color: white;
+  box-shadow: inset 0 0 10px rgba(255, 0, 255, 0.2);
+  border-bottom-right-radius: 0;
+}
+
+.msg-ai {
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.2);
+  border-bottom-left-radius: 0;
+  text-shadow: 0 0 2px var(--neon-cyan);
+}
+
+.chat-footer {
+  padding: 12px;
+  border-top: 1px solid var(--neon-cyan);
+  display: flex;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.chat-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  padding: 10px;
+  font-family: 'Varela Round', sans-serif;
+  outline: none;
+  border-radius: 2px;
+  transition: 0.2s;
+}
+
+.chat-input::placeholder {
+  color: rgba(0, 255, 255, 0.4);
+}
+
+.chat-input:focus {
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 8px var(--neon-pink);
+  color: var(--neon-pink);
+}
+
+.chat-send-btn {
+  background: transparent;
+  border: 2px solid var(--neon-pink);
+  color: white;
+  padding: 0 15px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  transition: 0.2s;
+  text-shadow: 0 0 5px var(--neon-pink);
+}
+
+.chat-send-btn:hover:not(:disabled) {
+  background: var(--neon-pink);
+  color: var(--dark-purple);
+  box-shadow: 0 0 15px var(--neon-pink), inset 0 0 10px var(--neon-pink);
+}
+
+.chat-send-btn:disabled {
+  border-color: #555;
+  color: #555;
+  cursor: not-allowed;
+  text-shadow: none;
+}
+
+/* Loading Dots Animation */
+.loading-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 15px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--neon-cyan);
+  border-radius: 50%;
+  animation: typing-bounce 1.4s infinite ease-in-out both;
+}
+
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; box-shadow: 0 0 5px var(--neon-cyan); }
+}
+
+@keyframes blink-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--neon-green); }
+  50% { opacity: 0.5; box-shadow: 0 0 2px var(--neon-green); }
+}

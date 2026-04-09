@@ -2,6 +2,7 @@ import './App.css'
 import {useEffect, useState} from "react";
 import type {Game} from './types/Game.tsx';
 import {Link} from "react-router";
+import ChatWidget from "./components/ChatWidget.tsx";
 
 function Home() {
     const [games, setGames] = useState<Game[]>([])
@@ -50,6 +51,8 @@ function Home() {
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
             </div>
+
+            <ChatWidget />
 
             <div className="game-grid">
                 {games.length === 0 ? (
