@@ -6,7 +6,7 @@ import ChatWidget from "./components/ChatWidget.tsx";
 
 function Home() {
     const [games, setGames] = useState<Game[]>([])
-    const [searchTerm, setSearchTerm] = useState(""); // New state for the search bar
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,24 +24,9 @@ function Home() {
     );
 
     return (
-        // <>
-        //     <h1>Home</h1>
-        //
-        //     {games.length > 0 && (
-        //         games.map(game => (
-        //             <div key={game.id} className={"pb-3"}>
-        //                 <Link to={`/details/${game.id}`}>
-        //                     {game.name}
-        //                 </Link>
-        //             </div>
-        //         ))
-        //     )}
-        // </>
 
         <div className="synthwave-container">
-            {/*<h1 className="neon-title">ARCADE</h1>*/}
 
-            {/* The Search Terminal */}
             <div className="search-container">
                 <input
                     type="text"

@@ -1,11 +1,9 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+
 import {loadStripe, type StripeEmbeddedCheckoutOptions} from '@stripe/stripe-js'
 import {useCallback} from "react";
 import {EmbeddedCheckout, EmbeddedCheckoutProvider} from "@stripe/react-stripe-js";
 import Cookies from "js-cookie";
-// import {Navigate} from "react-router";
+
 
 export default function Checkout() {
 
@@ -44,7 +42,6 @@ export default function Checkout() {
                 </EmbeddedCheckoutProvider>
             </div>
 
-            {/*<Navigate to={"checkout"}/>*/}
         </>
     )
 }
