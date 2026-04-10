@@ -91,7 +91,7 @@ export default function Home() {
                             <div className="suggested-info">
                                 <h3 className="suggested-title">{suggestedGame.name}</h3>
                                 <p className="game-price suggested-price">
-                                    {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(suggestedGame.price / 100)}
+                                    {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'CAD' }).format(suggestedGame.price / 100)}
                                 </p>
                                 <p className="suggested-desc">
                                     {/* Truncate the description so it doesn't break the card size */}
@@ -119,7 +119,7 @@ export default function Home() {
                         <Link to={`/details/${game.id}`} key={game.id} className="game-card">
                             <h3 className="game-title">{game.name}</h3>
                             <p className="game-price">
-                                {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(game.price / 100)}
+                                {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'CAD' }).format(game.price / 100)}
                             </p>
                         </Link>
                     ))

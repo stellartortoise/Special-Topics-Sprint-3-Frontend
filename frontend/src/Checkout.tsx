@@ -79,7 +79,7 @@ export default function Checkout() {
                                     <div key={index} className="summary-row">
                                         <span>{item.name} (x{item.quantity})</span>
                                         <span>
-                                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format((item.price * item.quantity) / 100)}
+                                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'CAD' }).format((item.price * item.quantity) / 100)}
                                     </span>
                                     </div>
                                 ))}
