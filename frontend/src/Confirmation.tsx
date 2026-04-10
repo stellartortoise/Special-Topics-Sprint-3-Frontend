@@ -49,7 +49,7 @@ export default function Confirmation() {
                     </p>
 
                     <p className="details-description text-center text-muted">
-                        For support inquiries, ping: sysadmin@arcade.net
+                        For support inquiries, ping: sysadmin@email.email
                     </p>
 
                     <div className="button-group-center">

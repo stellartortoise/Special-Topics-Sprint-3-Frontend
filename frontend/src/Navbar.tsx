@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import Cookies from "js-cookie";
 import type { Cart, CartItem } from "./types/Cart.tsx";
 import type { Game } from "./types/Game.tsx";
+import lostCartridgeLogo from './assets/lost_cartridge.png';
 
 type CartDetailItem = Game & { quantity: number };
 
@@ -72,10 +73,21 @@ export default function Navbar() {
     const cartTax = Math.round(cartSubtotal * 0.14); // 14% Tax, rounded to the nearest cent
     const cartTotal = cartSubtotal + cartTax;
 
+    useEffect(() => {
+        if (isCartOpen) {
+            document.body.classList.add('cart-open');
+        } else {
+            document.body.classList.remove('cart-open');
+        }
+
+        // Cleanup function in case the navbar unmounts while the cart is open
+        return () => document.body.classList.remove('cart-open');
+    }, [isCartOpen]);
+
     return (
         <>
             <nav className="synth-navbar">
-                <Link to="/" className="nav-logo">LOST CARTRIDGE</Link>
+                <Link to="/" className="nav-logo"><img src={lostCartridgeLogo} alt="Lost Cartridge" style={{ height: '80px', width: 'auto' }} /></Link>
                 <button className="neon-button cart-btn" onClick={() => setIsCartOpen(true)}>
                     CART [{cartCount}]
                 </button>

@@ -69,14 +69,22 @@ export default function Checkout() {
                 <div className="order-summary-panel">
                     <h2 className="summary-header">ORDER MANIFEST</h2>
                     <div className="summary-list">
-                        {cartDetails.map((item, index) => (
-                            <div key={index} className="summary-row">
-                                <span>{item.name} (x{item.quantity})</span>
-                                <span>
-                                    {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'CAD' }).format((item.price * item.quantity) / 100)}
-                                </span>
+                        {isLoading ? (
+                            <div className="summary-list">
+                                <p className="text-muted blink-text">Decrypting manifest...</p>
                             </div>
-                        ))}
+                        ) : (
+                            <div className="summary-list">
+                                {cartDetails.map((item, index) => (
+                                    <div key={index} className="summary-row">
+                                        <span>{item.name} (x{item.quantity})</span>
+                                        <span>
+                                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format((item.price * item.quantity) / 100)}
+                                    </span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     <div className="summary-totals">

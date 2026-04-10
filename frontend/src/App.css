@@ -322,7 +322,7 @@ body {
   align-items: center;
 
   /* 1. Add generous padding (top/bottom, left/right) to push elements inward */
-  padding: 1.5rem 4rem;
+  padding: 0.5rem 3rem;
 
   /* 2. Give it a dark, semi-transparent background to separate it from the main grid */
   background: rgba(11, 0, 20, 0.9);
@@ -521,6 +521,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
+  transition: right 0.3s ease-in-out;
+}
+
+/* NEW: When the cart is open, push the chat 370px to the left
+  (350px for the cart width + 20px for padding) */
+body.cart-open .chat-container {
+  right: 370px;
 }
 
 .chat-fab {
